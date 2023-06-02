@@ -93,4 +93,20 @@ void PhoneBook::display() {
 		std::cout << std::endl;
 		i++;
 	}
+	std::string line = "";
+	int index;
+	while (line.empty()) {
+		std::cout << "Select index: ";
+		std::getline(std::cin, line);
+		std::stringstream ss(line);
+		if (!(ss >> index) || !this->c[index - 1].exists() || index < 1) {
+			std::cout << "fatal: invalid index" << std::endl;
+			line = "";
+		}
+	}
+	std::cout << "First name: " << this->c[index - 1].get_fn() << std::endl;
+	std::cout << "Last name: " << this->c[index - 1].get_ln() << std::endl;
+	std::cout << "Nickname: " << this->c[index - 1].get_nn() << std::endl;
+	std::cout << "Phone number: " << this->c[index - 1].get_pn() << std::endl;
+	std::cout << "Darkest secret: " << this->c[index - 1].get_ds() << std::endl;
 }
