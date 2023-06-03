@@ -1,44 +1,33 @@
-NAME = sed
-
-TNAME = tester
+NAME = accounting
 
 CC = c++
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
-# CFLAGS += -fsanitize=address -g3
+CFLAGS += -g3
 
-# LDFLAGS = -fsanitize=address
+LDFLAGS = -fsanitize=address
 
-SRC = sed.cpp \
-      main.cpp
+SRC = tests.cpp \
+      Account.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-TST = tests.cpp
-
-TOBJ = $(TST:.cpp=.o)
-
 RM = rm -f
 
-all: $(NAME) $(TNAME)
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
-
-$(TNAME): $(NAME) $(TOBJ)
-	$(CC) $(CFLAGS) $(TOBJ) -o $(TNAME)
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)
-	$(RM) $(TOBJ)
 
 fclean: clean
 	$(RM) $(NAME)
-	$(RM) $(TNAME)
 
 re: fclean all
 

@@ -38,4 +38,6 @@ void sed(str path, str src, str dest)
 	while (std::getline(infile, buffer)) {
 		outfile << replace(buffer, src, dest) << std::endl;
 	}
+	infile.close();
+	outfile.close();
 }

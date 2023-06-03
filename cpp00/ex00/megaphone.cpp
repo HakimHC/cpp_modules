@@ -1,12 +1,10 @@
-#include <cctype>
-#include <ios>
 #include <iostream>
 #include <string>
 
 std::string upper(std::string str)
 {
 	for (unsigned int i = 0; i < str.length(); i++)
-		str[i] = toupper(str[i]);
+		str[i] = std::toupper(str[i]);
 	return str;
 }
 
