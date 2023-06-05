@@ -2,22 +2,19 @@
 
 #include "Fixed.hpp"
 
-union fi {
-	float f;
-	unsigned int i;
-};
-
 int main( void ) {
-	Fixed a(10);
-	std::cout << a.toFloat() << std::endl;
-	/* fi fi; */
-	/* fi.f = -2.24; */
-	/* for (int i = 31; i >= 0; i--) { */
-	/* 	if (!((fi.i >> i) & 1)) */
-	/* 		std::cout << 0; */
-	/* 	else */
-	/* 	 	std::cout << 1; */
-	/* } */
-	/* std::cout << std::endl; */
-	/* std::cout << (float) fi.i << std::endl; */
+Fixed a;
+Fixed const b( 10 );
+Fixed const c( 42.42f );
+Fixed const d( b );
+a = Fixed( 1234.4321f );
+std::cout << "a is " << a << std::endl;
+std::cout << "b is " << b << std::endl;
+std::cout << "c is " << c << std::endl;
+std::cout << "d is " << d << std::endl;
+std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+return 0;
 }

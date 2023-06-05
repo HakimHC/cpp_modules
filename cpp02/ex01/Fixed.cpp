@@ -5,11 +5,6 @@
 
 int const Fixed::fbits = 8;
 
-union fi {
-	float f;
-	int i;
-};
-
 Fixed::Fixed()
 	:val(0)
 {std::cout << "Default constructor called" << std::endl;}
@@ -29,12 +24,12 @@ Fixed::Fixed(float const n) {
 	this->val = (int) res;
 }
 
-Fixed::Fixed(Fixed& other) {
+Fixed::Fixed(const Fixed& other) {
 	std::cout << "Copy constructor called" << std::endl;
 	this->val = other.getRawBits();
 }
 
-Fixed& Fixed::operator=(Fixed& rhs) {
+Fixed& Fixed::operator=(const Fixed& rhs) {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &rhs) {
 		this->val = rhs.getRawBits();
@@ -63,4 +58,9 @@ float Fixed::toFloat(void) const {
 	float res = (float) this->val;
 	res /= 256;
 	return res;
+}
+
+std::ostream& operator<<(std::ostream& os, const Fixed& obj) {
+	os << obj.toFloat();
+	return os;
 }
