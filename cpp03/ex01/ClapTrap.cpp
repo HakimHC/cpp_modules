@@ -2,11 +2,11 @@
 
 ClapTrap::ClapTrap()
 	:name("cp"), hp(10), ep(10), ad(0)
-{}
+{std::cout << "ClapTrap default constructor called" << std::endl;}
 
 ClapTrap::ClapTrap(std::string name)
 	:name(name), hp(10), ep(10), ad(0)
-{std::cout << "ClapTrap default constructor called" << std::endl;}
+{std::cout << "ClapTrap name constructor called" << std::endl;}
 
 ClapTrap::ClapTrap(ClapTrap& other)
 	:name(other.name), hp(other.hp), ep(other.ep), ad(other.ad)
@@ -31,23 +31,21 @@ void ClapTrap::takeDamage(unsigned int amount) {
 			this->hp = 0;
 		else
 			this->hp -= amount;
-		std::cout << "ClapTrap " << this->name << " took "
-			<< amount << " damage points (HP: " << this->hp << " )" << std::endl;
+		std::cout << this->name << " took " << amount << " damage points (HP: " << this->hp << " )" << std::endl;
 	}
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
 	if (this->hp > 0 && this->ep) {
 		this->hp += amount;
-		std::cout << "ClapTrap " << this->name << " got healed (HP: " << this->hp << " )" << std::endl;
+		std::cout << this->name << " got healed (HP: " << this->hp << " )" << std::endl;
 		this->ep--;
 	}
 }
 
 void ClapTrap::attack(const std::string& target) {
 	if (this->hp > 0 && this->ep) {
-		std::cout << "ClapTrap " << this->name << " attacks " << target <<
-			", causing " << this->ad << " points of damage!" <<
+		std::cout << "ClapTrap " << this->name << " attacks " << target << ", causing " << this->ad << " points of damage!" <<
 			std::endl;
 		this->ep--;
 	}
