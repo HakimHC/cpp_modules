@@ -8,7 +8,7 @@ CFLAGS += -std=c++98
 
 CFLAGS += -g3
 
-LDFLAGS = -fsanitize=address
+LDFLAGS = -fsanitize=leak
 
 SRC = main.cpp \
       Zombie.cpp \

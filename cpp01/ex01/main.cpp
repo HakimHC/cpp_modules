@@ -34,6 +34,4 @@ int	main(void)
 	z = zombieHorde(n, name);
 	if (!z)
 		return 1;
-
-	kill_them_all(z);
 }
