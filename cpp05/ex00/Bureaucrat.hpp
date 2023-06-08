@@ -1,23 +1,43 @@
 #ifndef BUREAUCRAT_H
 # define BUREAUCRAT_H
 
+#include <exception>
 # include <string>
 # include <iostream>
 
 class Bureaucrat {
 	private:
-		std::string const& name;
-		int grade;
+		const std::string 	_name;
+		int 			_grade;
 
 	public:
-		Bureaucrat(std::string const&, int);
+		Bureaucrat();
+		Bureaucrat(const std::string, int);
 		Bureaucrat(Bureaucrat&);
-		Bureaucrat& operator=(Bureaucrat& rhs);
+		Bureaucrat& 		operator=(Bureaucrat& rhs);
 		~Bureaucrat();
-		std::string const getName();
-		int const getGrade();
-		void incgr();
-		void decgr();
+		const std::string 	getName();
+		int 			getGrade();
+		void 			incgr();
+		void 			decgr();
+
+		class GradeTooHighException : public std::exception {
+			private:
+				std::string _msg;
+			public:
+				GradeTooHighException();
+				virtual ~GradeTooHighException() throw();
+				virtual const char* what() const throw();
+		};
+
+		class GradeTooLowException : public std::exception {
+			private:
+				std::string _msg;
+			public:
+				GradeTooLowException();
+				virtual ~GradeTooLowException() throw();
+				virtual const char* what() const throw();
+		};
 };
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ClapTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hakim </var/spool/mail/hakim>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/08 13:55:24 by hakim             #+#    #+#             */
+/*   Updated: 2023/06/08 13:55:25 by hakim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap()
@@ -27,10 +39,7 @@ ClapTrap::~ClapTrap()
 
 void ClapTrap::takeDamage(unsigned int amount) {
 	if (this->hp > 0 && this->ep) {
-		if (this->hp < amount)
-			this->hp = 0;
-		else
-			this->hp -= amount;
+		this->hp < amount ? this->hp = 0 : this->hp -= amount;
 		std::cout << "ClapTrap " << this->name << " took "
 			<< amount << " damage points (HP: " << this->hp << " )" << std::endl;
 	}
