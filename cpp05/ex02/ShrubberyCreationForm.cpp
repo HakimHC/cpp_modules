@@ -1,14 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hakim </var/spool/mail/hakim>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/09 05:00:57 by hakim             #+#    #+#             */
+/*   Updated: 2023/06/09 05:01:09 by hakim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ShrubberyCreationForm.hpp"
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include <fstream>
 
 // CANONICAL MEMBER FUNCTIONS
 
 // ===================================================================================
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-	:AForm("SCFform", 145, 137)
+	:AForm("SCFform", 145, 137), _target("home")
 {std::cout << "ShrubberyCreationForm default constructor called" << std::endl;}
+
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
+	:AForm("SCFform", 145, 137), _target(target)
+{std::cout << "ShrubberyCreationForm target constructor called" << std::endl;}
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm& other)
 	:AForm(other.getName(), other.getRGradeSign(), other.getRGradeExec())
@@ -31,5 +48,13 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) {
 		throw FormNotSignedException();
 	if (this->getRGradeExec() < executor.getGrade())
 		throw GradeTooLowException();
-	std::cout << "jiji" << std::endl;
+
+	std::ofstream outfile;
+	outfile.open(std::string(this->_target + "_shrubbery").c_str());
+	if (!outfile.is_open()) {
+		std::cerr << "fatal: can't open outfile" << std::endl;
+		return ;
+	}
+	outfile << "ASCII TREES :DDDDDD" << std::endl;
+	outfile.close();;
 }

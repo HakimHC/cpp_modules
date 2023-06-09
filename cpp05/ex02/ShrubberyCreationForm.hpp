@@ -5,8 +5,12 @@
 
 class ShrubberyCreationForm: public AForm {
 	
+	private:
+		std::string 		_target;
+
 	public:
 		ShrubberyCreationForm();
+		ShrubberyCreationForm(std::string);
 		ShrubberyCreationForm(ShrubberyCreationForm& other);
 		~ShrubberyCreationForm();
 		ShrubberyCreationForm& operator=(ShrubberyCreationForm& rhs);
