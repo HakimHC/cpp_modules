@@ -1,76 +1,81 @@
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat()
-	:_name("buro"), _grade(50)
-{std::cout << "Default constructor called" << std::endl;}
+Form::Form()
+	:_name("form"), _isSigned(false), _rGradeSign(50), _rGradeExec(20)
+{std::cout << "Form default constructor called" << std::endl;}
 
-Bureaucrat::Bureaucrat(const std::string name, int grade)
-	:_name(name)
+Form::Form(std::string name, int rGradeSign, int rGradeExec)
+	:_name(name), _isSigned(false), _rGradeSign(rGradeSign), _rGradeExec(rGradeExec)
 {
-	std::cout << "Buro params constructor called" << std::endl;
-	if (grade < 0)
-		throw Bureaucrat::GradeTooHighException();
-	this->_grade = grade;
+	std::cout << "Form params constructor called" << std::endl;
+	if (rGradeSign < 1 || rGradeExec < 1)
+		throw Form::GradeTooHighException();
+	if (rGradeSign > 150 || rGradeExec > 150)
+		throw Form::GradeTooLowException();
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat& other)
-	:_name(other._name), _grade(other._grade)
+Form::Form(Form& other)
+	:_name(other._name), _isSigned(other._isSigned), _rGradeSign(other._rGradeSign), _rGradeExec(other._rGradeExec)
 {
-	std::cout << "Buro copy constructor called" << std::endl;
+	std::cout << "Form copy constructor called" << std::endl;
 }
 
-Bureaucrat& Bureaucrat::operator=(Bureaucrat& rhs) {
+Form& Form::operator=(Form& rhs) {
 	if (this != &rhs) {
-		this->_grade = rhs._grade;
+		this->_isSigned = rhs._isSigned;
 	}
 	return *this;
 }
 
-Bureaucrat::~Bureaucrat() {
-	std::cout << "Buro destructor called" << std::endl;
+Form::~Form() {
+	std::cout << "Form destructor called" << std::endl;
 }
 
-const std::string Bureaucrat::getName() {
+const std::string Form::getName() {
 	return this->_name;
 }
 
-int Bureaucrat::getGrade() {
-	return this->_grade;
+bool Form::isSigned() {
+	return this->_isSigned;
 }
 
-void Bureaucrat::incrementGrade() {
-	if (this->_grade - 1 < 1) {
-		throw Bureaucrat::GradeTooHighException();
-	}
-	this->_grade -= 1;
+int Form::getRGradeExec() {
+	return this->_rGradeExec;
 }
 
-void Bureaucrat::decrementGrade() {
-	if (this->_grade + 1 > 150) {
-		throw Bureaucrat::GradeTooLowException();
-	}
-	this->_grade += 1;
+int Form::getRGradeSign() {
+	return this->_rGradeSign;
 }
 
-Bureaucrat::GradeTooHighException::GradeTooHighException()
-	:_msg("Bureaucrat::GradeTooHighException: fatal: grade too high") {}
+void Form::beSigned(Bureaucrat& b) {
+	if (b.getGrade() > this->_rGradeSign)
+		throw (Form::GradeTooLowException());
+	this->_isSigned = true;
+}
 
-Bureaucrat::GradeTooLowException::GradeTooLowException()
-	:_msg("Bureaucrat::GradeTooLowException: fatal: grade too low") {}
+Form::GradeTooHighException::GradeTooHighException()
+	:_msg("Form::GradeTooHighException: fatal: grade too high") {}
 
-const char* Bureaucrat::GradeTooHighException::what() const throw() {
+Form::GradeTooLowException::GradeTooLowException()
+	:_msg("Form::GradeTooLowException: fatal: grade too low") {}
+
+const char* Form::GradeTooHighException::what() const throw() {
 	return this->_msg.c_str();
 }
 
-const char* Bureaucrat::GradeTooLowException::what() const throw() {
+const char* Form::GradeTooLowException::what() const throw() {
 	return this->_msg.c_str();
 }
 
-Bureaucrat::GradeTooLowException::~GradeTooLowException() throw() {}
-Bureaucrat::GradeTooHighException::~GradeTooHighException() throw() {}
+Form::GradeTooLowException::~GradeTooLowException() throw() {}
+Form::GradeTooHighException::~GradeTooHighException() throw() {}
 
 
-std::ostream& operator<<(std::ostream& os, Bureaucrat& obj) {
-	os << obj.getName() << ", bureaucrat grade " << obj.getGrade();
+std::ostream& operator<<(std::ostream& os, Form& obj) {
+	os << obj.getName() << ", form" << std::endl;
+	os << "Required grade to sign: " << obj.getRGradeSign() << std::endl;
+	os << "Required grade to execute: " << obj.getRGradeExec() << std::endl;
+	os << (obj.isSigned() ? "Signed" : "Not signed") << std::endl;
 	return os;
 }

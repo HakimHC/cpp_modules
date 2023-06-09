@@ -1,30 +1,54 @@
-#include "Bureaucrat.hpp"
 #include <exception>
 
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
+
 int main() {
-	Bureaucrat b("carlos", 5);
+	Form f("Form1", 20, 10);
 
-	for (int i = 0; i <  10; i++) {
-		std::cout << b << std::endl;
-		try {
+	std::cout << f;
 
-			b.incgr();
-		}
-		catch (std::exception& e) {
-			std::cout << e.what() << std::endl;
-		}
-	}
+	std::cout << "==== ====" << std::endl;
+	std::cout << "Lets create a Buro that doesnt meet the requirements" << std::endl;
 
-	for (int i = 0; i < 149; i++) {
-		b.decgr();
-	}
+	Bureaucrat b("carlos", 70);
 	std::cout << b << std::endl;
-	try {
+	b.signForm(f);
+	std::cout << "==== ====" << std::endl;
+	std::cout << "That was expected" << std::endl;
+	std::cout << "Now lets create a buro that does meet the requirements" << std::endl;
 
-		b.decgr();
+	Bureaucrat b2("carlos", 5);
+	std::cout << b2 << std::endl;
+	b2.signForm(f);
+	std::cout << f.getName() << ": isSigned(): " << f.isSigned() << std::endl;
+	std::cout << "==== ====" << std::endl;
+	std::cout << "Now lets create invalid forms" << std::endl;
+
+	try {
+		Form f2("Form2", -24, 10);
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+	try {
+		Form f2("Form3", 10, -4);
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
 
+	try {
+		Form f2("Form4", 150, 151);
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+
+	try {
+		Form f2("Form5", 151, 10);
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
 }

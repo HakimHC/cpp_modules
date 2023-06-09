@@ -1,11 +1,12 @@
-NAME = ex00
+NAME = ex01
 
 CC = c++
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRC = main.cpp \
-      Bureaucrat.cpp
+      Bureaucrat.cpp \
+      Form.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
