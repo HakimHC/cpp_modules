@@ -40,14 +40,14 @@ int Bureaucrat::getGrade() {
 	return this->_grade;
 }
 
-void Bureaucrat::incgr() {
+void Bureaucrat::incrementGrade() {
 	if (this->_grade - 1 < 1) {
 		throw Bureaucrat::GradeTooHighException();
 	}
 	this->_grade -= 1;
 }
 
-void Bureaucrat::decgr() {
+void Bureaucrat::decrementGrade() {
 	if (this->_grade + 1 > 150) {
 		throw Bureaucrat::GradeTooLowException();
 	}

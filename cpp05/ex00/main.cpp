@@ -9,7 +9,7 @@ int main() {
 		std::cout << b << std::endl;
 		try {
 
-			b.incgr();
+			b.incrementGrade();
 		}
 		catch (std::exception& e) {
 			std::cout << e.what() << std::endl;
@@ -18,12 +18,12 @@ int main() {
 	std::cout << "========== ==========" << std::endl;
 
 	for (int i = 0; i < 149; i++) {
-		b.decgr();
+		b.decrementGrade();
 	}
 	std::cout << b << std::endl;
 	try {
 
-		b.decgr();
+		b.decrementGrade();
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
