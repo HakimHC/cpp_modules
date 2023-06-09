@@ -76,10 +76,13 @@ void Bureaucrat::signForm(AForm& f) {
 	try {
 		f.beSigned(*this);
 	}
-	catch (std::exception& e) {
+	catch (AForm::GradeTooLowException& e) {
 		std::cout << this->getName() << " couldn't sign form " << f.getName()
 			<< " because his grade is too low" << std::endl;
 		return ;
+	}
+	catch (AForm::FormAlreadySignedException& e) {
+		return;
 	}
 	std::cout << this->getName() << " signed " << f.getName() << std::endl;
 }
@@ -89,8 +92,14 @@ void Bureaucrat::executeForm(AForm const& form) {
 	try {
 		form.execute(*this);
 	}
-	catch (std::exception& e) {
-		std::cout << this->getName() << " couldnt execute this form" << std::endl;
+	catch (AForm::GradeTooLowException& e) {
+		std::cout << this->getName() << " couldnt execute form " << form.getName();
+		std::cout << " (reason: " << e.what() << ")" << std::endl;
+		return;
+	}
+	catch (AForm::FormNotSignedException& e) {
+		std::cout << this->getName() << " couldn't sign form " << form.getName();
+		std::cout << " (reason: " << e.what() << ")" << std::endl;
 		return;
 	}
 	

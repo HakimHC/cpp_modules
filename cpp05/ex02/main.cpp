@@ -34,14 +34,14 @@ int main() {
 	RobotomyRequestForm* f2 = new RobotomyRequestForm("RRF");
 	if (!f2)
 		return 2;
-	std::cout << *f;
+	std::cout << *f2;
 	std::cout << "Lets execute this form a couple of times" << std::endl;
-	b.signForm(*f);
-	b.executeForm(*f);
-	b.executeForm(*f);
-	b.executeForm(*f);
-	b.executeForm(*f);
-	b.executeForm(*f);
+	b.signForm(*f2);
+	b.executeForm(*f2);
+	b.executeForm(*f2);
+	b.executeForm(*f2);
+	b.executeForm(*f2);
+	b.executeForm(*f2);
 	std::cout << "========== ==========" << std::endl;
 	delete f2;
 	std::cout << "========== ==========" << std::endl;
@@ -52,7 +52,25 @@ int main() {
 		return 3;
 	std::cout << *f3;
 	b.signForm(*f3);
-	b.executeForm(*f);
-
+	b.executeForm(*f3);
 	delete f3;
+	std::cout << "========== ==========" << std::endl;
+	std::cout << "Now lets see some error handling" << std::endl;
+	std::cout << "========== ==========" << std::endl;
+	std::cout << "Executing a not signed form: " << std::endl;
+	PresidentialPardonForm* ppf = new PresidentialPardonForm("eHan");
+	if (!ppf)
+		return 4;
+	b.executeForm(*ppf);
+	delete ppf;
+	std::cout << "========== ==========" << std::endl;
+	std::cout << "Not having enough grade to execute, but enough to sign" << std::endl;
+	std::cout << "========== ==========" << std::endl;
+	Bureaucrat b2("juan", 140);
+	ShrubberyCreationForm* scf = new ShrubberyCreationForm("SCF");
+	if (!scf)
+		return 1;
+	b2.signForm(*scf);
+	b2.executeForm(*scf);
+	delete scf;
 }

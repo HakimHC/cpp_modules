@@ -55,8 +55,9 @@ void AForm::setSign(bool sign) {
 void AForm::beSigned(Bureaucrat& b) {
 	if (b.getGrade() > this->_rGradeSign)
 		throw (AForm::GradeTooLowException());
-	if (this->_isSigned){
-		std::cout << this->_name << ": form already signed" << std::endl;
+	if (this->_isSigned) {
+		std::cout << this->_name << ": form is already signed" << std::endl;
+		throw AForm::FormAlreadySignedException();
 		return;
 	}
 	this->_isSigned = true;
@@ -75,6 +76,9 @@ AForm::GradeTooLowException::GradeTooLowException()
 AForm::FormNotSignedException::FormNotSignedException()
 	:_msg("AForm::FormNotSignedException: fatal: form not signed") {}
 
+AForm::FormAlreadySignedException::FormAlreadySignedException()
+	:_msg("Form::FormAlreadySignedException: form already signed") {}
+
 const char* AForm::GradeTooHighException::what() const throw() {
 	return this->_msg.c_str();
 }
@@ -87,9 +91,14 @@ const char* AForm::FormNotSignedException::what() const throw() {
 	return this->_msg.c_str();
 }
 
+const char* AForm::FormAlreadySignedException::what() const throw() {
+	return this->_msg.c_str();
+}
+
 AForm::GradeTooLowException::~GradeTooLowException() throw() {}
 AForm::GradeTooHighException::~GradeTooHighException() throw() {}
 AForm::FormNotSignedException::~FormNotSignedException() throw() {}
+AForm::FormAlreadySignedException::~FormAlreadySignedException() throw() {}
 
 
 std::ostream& operator<<(std::ostream& os, AForm& obj) {

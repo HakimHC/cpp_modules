@@ -13,12 +13,14 @@ SRC = main.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 
+LDFLAGS = -fsanitize=address
+
 RM = rm -f
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
