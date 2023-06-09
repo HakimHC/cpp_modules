@@ -8,8 +8,10 @@ Bureaucrat::Bureaucrat(const std::string name, int grade)
 	:_name(name)
 {
 	std::cout << "Buro params constructor called" << std::endl;
-	if (grade < 0)
+	if (grade < 1)
 		throw Bureaucrat::GradeTooHighException();
+	if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
 	this->_grade = grade;
 }
 
