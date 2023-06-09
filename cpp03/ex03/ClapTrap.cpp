@@ -4,8 +4,8 @@ ClapTrap::ClapTrap()
 	:name("cp"), hp(10), ep(10), ad(0)
 {std::cout << "ClapTrap default constructor called" << std::endl;}
 
-ClapTrap::ClapTrap(std::string name)
-	:name(name), hp(10), ep(10), ad(0)
+ClapTrap::ClapTrap(std::string n)
+	:name(n), hp(10), ep(10), ad(0)
 {std::cout << "ClapTrap name constructor called" << std::endl;}
 
 ClapTrap::ClapTrap(ClapTrap& other)

@@ -2,12 +2,13 @@ NAME = fragtrap
 
 CC = c++
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98 -Wshadow
 
 SRC = main.cpp \
       ClapTrap.cpp \
       ScavTrap.cpp \
-      FragTrap.cpp
+      FragTrap.cpp \
+      DiamondTrap.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

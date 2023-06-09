@@ -55,7 +55,15 @@ void AForm::setSign(bool sign) {
 void AForm::beSigned(Bureaucrat& b) {
 	if (b.getGrade() > this->_rGradeSign)
 		throw (AForm::GradeTooLowException());
+	if (this->_isSigned){
+		std::cout << this->_name << ": form already signed" << std::endl;
+		return;
+	}
 	this->_isSigned = true;
+}
+
+bool AForm::isExecutable(int grade) const {
+	return (grade <= this->_rGradeExec);
 }
 
 AForm::GradeTooHighException::GradeTooHighException()

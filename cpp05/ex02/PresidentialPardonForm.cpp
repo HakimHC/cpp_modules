@@ -6,7 +6,7 @@
 /*   By: hakim </var/spool/mail/hakim>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 05:00:57 by hakim             #+#    #+#             */
-/*   Updated: 2023/06/09 05:18:55 by hakim            ###   ########.fr       */
+/*   Updated: 2023/06/09 12:20:20 by hakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ PresidentialPardonForm::~PresidentialPardonForm()
 void PresidentialPardonForm::execute(Bureaucrat const & executor) const {
 	if (!this->isSigned())
 		throw FormNotSignedException();
-	if (this->getRGradeExec() < executor.getGrade())
+	if (!this->isExecutable(executor.getGrade()))
 		throw GradeTooLowException();
 	
 	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;

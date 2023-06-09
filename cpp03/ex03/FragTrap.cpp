@@ -10,10 +10,10 @@ FragTrap::FragTrap()
 	std::cout << "FragTrap default constructor called" << std::endl;
 }
 
-FragTrap::FragTrap(std::string& name)
-	:ClapTrap(name)
+FragTrap::FragTrap(std::string n)
+	:ClapTrap(n)
 {
-	this->name = name;
+	this->name = n;
 	this->hp = 100;
 	this->ep = 100;
 	this->ad = 30;

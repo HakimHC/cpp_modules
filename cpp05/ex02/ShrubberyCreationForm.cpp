@@ -6,7 +6,7 @@
 /*   By: hakim </var/spool/mail/hakim>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 05:00:57 by hakim             #+#    #+#             */
-/*   Updated: 2023/06/09 05:17:56 by hakim            ###   ########.fr       */
+/*   Updated: 2023/06/09 12:33:43 by hakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	if (!this->isSigned())
 		throw FormNotSignedException();
-	if (this->getRGradeExec() < executor.getGrade())
+	if (!this->isExecutable(executor.getGrade()))
 		throw GradeTooLowException();
 
 	std::ofstream outfile;
@@ -55,6 +55,6 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 		std::cerr << "fatal: can't open outfile" << std::endl;
 		return ;
 	}
-	outfile << "ASCII TREES :DDDDDD" << std::endl;
+	outfile << "| a s c i i  t r e e s |" << std::endl;
 	outfile.close();;
 }
