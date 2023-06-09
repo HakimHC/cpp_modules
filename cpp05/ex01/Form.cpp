@@ -51,6 +51,11 @@ int Form::getRGradeSign() {
 void Form::beSigned(Bureaucrat& b) {
 	if (b.getGrade() > this->_rGradeSign)
 		throw (Form::GradeTooLowException());
+	if (this->_isSigned) {
+		std::cout << this->_name << ": form is already signed" << std::endl;
+		throw Form::FormAlreadySignedException();
+		return;
+	}
 	this->_isSigned = true;
 }
 
@@ -60,6 +65,9 @@ Form::GradeTooHighException::GradeTooHighException()
 Form::GradeTooLowException::GradeTooLowException()
 	:_msg("Form::GradeTooLowException: fatal: grade too low") {}
 
+Form::FormAlreadySignedException::FormAlreadySignedException()
+	:_msg("Form::FormAlreadySignedException: form already signed") {}
+
 const char* Form::GradeTooHighException::what() const throw() {
 	return this->_msg.c_str();
 }
@@ -68,8 +76,13 @@ const char* Form::GradeTooLowException::what() const throw() {
 	return this->_msg.c_str();
 }
 
+const char* Form::FormAlreadySignedException::what() const throw() {
+	return this->_msg.c_str();
+}
+
 Form::GradeTooLowException::~GradeTooLowException() throw() {}
 Form::GradeTooHighException::~GradeTooHighException() throw() {}
+Form::FormAlreadySignedException::~FormAlreadySignedException() throw() {}
 
 
 std::ostream& operator<<(std::ostream& os, Form& obj) {

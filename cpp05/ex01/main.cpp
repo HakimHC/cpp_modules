@@ -51,4 +51,11 @@ int main() {
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
+	std::cout << "==== ====" << std::endl;
+	std::cout << "Last, but not least, lets sign a form three times" << std::endl;
+
+	Form form("lastForm", 100, 100);
+	b.signForm(form);
+	b.signForm(form);
+	b.signForm(form);
 }

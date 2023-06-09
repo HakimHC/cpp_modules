@@ -1,4 +1,6 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
+#include <exception>
 
 Bureaucrat::Bureaucrat()
 	:_name("buro"), _grade(50)
@@ -74,10 +76,13 @@ void Bureaucrat::signForm(Form& f) {
 	try {
 		f.beSigned(*this);
 	}
-	catch (std::exception& e) {
+	catch (Bureaucrat::GradeTooHighException& e) {
 		std::cout << this->getName() << " couldn't sign form " << f.getName()
 			<< " because his grade is too low" << std::endl;
 		return ;
+	}
+	catch (std::exception& e) {
+		return;	
 	}
 	std::cout << this->getName() << " signed " << f.getName() << std::endl;
 }

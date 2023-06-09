@@ -22,8 +22,8 @@ class Form {
 		Form& 				operator=(Form& rhs);
 		const std::string 		getName();
 		bool				isSigned();
-		int 			getRGradeSign();
-		int 			getRGradeExec();
+		int 				getRGradeSign();
+		int 				getRGradeExec();
 		void				beSigned(Bureaucrat&);
 
 		class GradeTooHighException : public std::exception {
@@ -41,6 +41,15 @@ class Form {
 			public:
 				GradeTooLowException();
 				virtual ~GradeTooLowException() throw();
+				virtual const char* what() const throw();
+		};
+
+		class FormAlreadySignedException : public std::exception {
+			private:
+				std::string _msg;
+			public:
+				FormAlreadySignedException();
+				virtual ~FormAlreadySignedException() throw();
 				virtual const char* what() const throw();
 		};
 };
