@@ -18,14 +18,14 @@ class AForm {
 		AForm();
 		AForm(std::string name, int rGradeSign, int rGradeExec);
 		AForm(AForm&);
-		~AForm();
+		virtual ~AForm();
 		AForm& 				operator=(AForm& rhs);
-		const std::string 		getName();
-		bool				isSigned();
-		int 				getRGradeSign();
-		int 				getRGradeExec();
+		const std::string 		getName() const;
+		int 				getRGradeSign() const;
+		int 				getRGradeExec() const;
+		bool				isSigned() const;
 		void				beSigned(Bureaucrat&);
-		virtual void			execute(Bureaucrat const& executor) = 0;
+		virtual void			execute(Bureaucrat const& executor) const = 0;
 
 		void				setSign(bool sign);
 

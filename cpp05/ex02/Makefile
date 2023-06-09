@@ -7,7 +7,8 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 SRC = main.cpp \
       Bureaucrat.cpp \
       AForm.cpp \
-      ShrubberyCreationForm.cpp
+      ShrubberyCreationForm.cpp \
+      PresidentialPardonForm.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

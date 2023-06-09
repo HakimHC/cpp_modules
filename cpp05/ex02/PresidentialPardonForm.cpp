@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakim </var/spool/mail/hakim>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 05:00:57 by hakim             #+#    #+#             */
-/*   Updated: 2023/06/09 05:17:56 by hakim            ###   ########.fr       */
+/*   Updated: 2023/06/09 05:18:55 by hakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include <fstream>
@@ -19,42 +19,35 @@
 
 // ===================================================================================
 
-ShrubberyCreationForm::ShrubberyCreationForm()
-	:AForm("SCFform", 145, 137), _target("home")
-{std::cout << "ShrubberyCreationForm default constructor called" << std::endl;}
+PresidentialPardonForm::PresidentialPardonForm()
+	:AForm("PPFform", 25, 5), _target("home")
+{std::cout << "PresidentialPardonForm default constructor called" << std::endl;}
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
-	:AForm("SCFform", 145, 137), _target(target)
-{std::cout << "ShrubberyCreationForm target constructor called" << std::endl;}
+PresidentialPardonForm::PresidentialPardonForm(std::string target)
+	:AForm("PPFform", 25, 5), _target(target)
+{std::cout << "PresidentialPardonForm target constructor called" << std::endl;}
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm& other)
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm& other)
 	:AForm(other.getName(), other.getRGradeSign(), other.getRGradeExec())
-{std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;}
+{std::cout << "PresidentialPardonForm copy constructor called" << std::endl;}
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm& rhs) {
+PresidentialPardonForm& PresidentialPardonForm::operator=(PresidentialPardonForm& rhs) {
 	if (this != &rhs) {
 		this->setSign(rhs.isSigned());
 	}
 	return *this;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
-{std::cout << "ShrubberyCreationForm destructor called" << std::endl;}
+PresidentialPardonForm::~PresidentialPardonForm()
+{std::cout << "PresidentialPardonForm destructor called" << std::endl;}
 
 // ===================================================================================
 
-void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
+void PresidentialPardonForm::execute(Bureaucrat const & executor) const {
 	if (!this->isSigned())
 		throw FormNotSignedException();
 	if (this->getRGradeExec() < executor.getGrade())
 		throw GradeTooLowException();
-
-	std::ofstream outfile;
-	outfile.open(std::string(this->_target + "_shrubbery").c_str());
-	if (!outfile.is_open()) {
-		std::cerr << "fatal: can't open outfile" << std::endl;
-		return ;
-	}
-	outfile << "ASCII TREES :DDDDDD" << std::endl;
-	outfile.close();;
+	
+	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }

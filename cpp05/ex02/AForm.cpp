@@ -32,19 +32,19 @@ AForm::~AForm() {
 	std::cout << "AForm destructor called" << std::endl;
 }
 
-const std::string AForm::getName() {
+const std::string AForm::getName() const {
 	return this->_name;
 }
 
-bool AForm::isSigned() {
+bool AForm::isSigned() const {
 	return this->_isSigned;
 }
 
-int AForm::getRGradeExec() {
+int AForm::getRGradeExec() const {
 	return this->_rGradeExec;
 }
 
-int AForm::getRGradeSign() {
+int AForm::getRGradeSign() const {
 	return this->_rGradeSign;
 }
 

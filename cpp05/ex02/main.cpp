@@ -3,11 +3,12 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main() {
+	Bureaucrat b("hakim", 3);
+	PresidentialPardonForm* f = new PresidentialPardonForm("fos");
 
-	ShrubberyCreationForm* s = new ShrubberyCreationForm("puta");
-	Bureaucrat b("janklin", 4);
-	b.signForm(*s);
-	s->execute(b);
+	b.signForm(*f);
+	b.executeForm(*f);
 }
