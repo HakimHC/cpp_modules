@@ -9,9 +9,11 @@ int	main(void)
 	PhoneBook pb;
 
 	while (true) {
-		std::cout << "Specify operation (ADD / DISPLAY / EXIT)" << std::endl;
 		std::string line;
+		std::cout << "Specify operation (ADD / DISPLAY / EXIT)" << std::endl;
 		std::getline(std::cin, line);
+		if (std::cin.eof())
+			return 1;
 		if (line == "ADD")
 			pb.add_contact();
 		else if (line == "DISPLAY")

@@ -31,30 +31,40 @@ void PhoneBook::add_contact() {
 	while (line.empty()) {
 		std::cout << "First name: ";
 		std::getline(std::cin, line);
+		if (std::cin.eof())
+			return;
 		this->c[n].set_fn(line);
 	}
 	line = "";
 	while (line.empty()) {
 		std::cout << "Last name: ";
 		std::getline(std::cin, line);
+		if (std::cin.eof())
+			return;
 		this->c[n].set_ln(line);
 	}
 	line = "";
 	while (line.empty()) {
 		std::cout << "Nick name: ";
 		std::getline(std::cin, line);
+		if (std::cin.eof())
+			return;
 		this->c[n].set_nn(line);
 	}
 	line = "";
 	while (line.empty()) {
 		std::cout << "Phone number: ";
 		std::getline(std::cin, line);
+		if (std::cin.eof())
+			return;
 		this->c[n].set_pn(line);
 	}
 	line = "";
 	while (line.empty()) {
 		std::cout << "Darkest secret: ";
 		std::getline(std::cin, line);
+		if (std::cin.eof())
+			return;
 		this->c[n].set_ds(line);
 	}
 	this->incr_cptr();
@@ -98,6 +108,8 @@ void PhoneBook::display() {
 	while (line.empty()) {
 		std::cout << "Select index: ";
 		std::getline(std::cin, line);
+		if (std::cin.eof())
+			return;
 		std::stringstream ss(line);
 		if (!(ss >> index) || !this->c[index - 1].exists() || index < 1) {
 			std::cout << "fatal: invalid index" << std::endl;

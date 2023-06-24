@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 	else {
 		for (int i = 1; i < argc; i++) {
 			std::cout << upper(argv[i]);
-			i + 1 >= argc ? std::cout << std::endl : std::cout << " ";
+			i + 1 >= argc ? std::cout << std::endl : std::cout << "";
 		}
 	}
 	return 0;
