@@ -1,10 +1,8 @@
 NAME = accounting
 
-CC = c++
+CXX = c++
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98
-
-CFLAGS += -g3
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 LDFLAGS = -fsanitize=address
 
@@ -13,15 +11,10 @@ SRC = tests.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 
-RM = rm -f
-
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)

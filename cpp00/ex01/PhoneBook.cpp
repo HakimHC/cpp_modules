@@ -111,10 +111,16 @@ void PhoneBook::display() {
 		if (std::cin.eof())
 			return;
 		std::stringstream ss(line);
-		if (!(ss >> index) || !this->c[index - 1].exists() || index < 1) {
+		if (!(ss >> index) ||  index < 1 || index > 8) {
 			std::cout << "fatal: invalid index" << std::endl;
-			line = "";
+			return;
 		}
+		if (!this->c[index - 1].exists())
+		{
+			std::cout << "fatal: invalid index" << std::endl;
+			return;
+		}
+
 	}
 	std::cout << "First name: " << this->c[index - 1].get_fn() << std::endl;
 	std::cout << "Last name: " << this->c[index - 1].get_ln() << std::endl;
