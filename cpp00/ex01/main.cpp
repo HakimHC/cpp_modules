@@ -10,13 +10,13 @@ int	main(void)
 
 	while (true) {
 		std::string line;
-		std::cout << "Specify operation (ADD / DISPLAY / EXIT)" << std::endl;
+		std::cout << "Specify operation (ADD / SEARCH / EXIT)" << std::endl;
 		std::getline(std::cin, line);
 		if (std::cin.eof())
 			return 1;
 		if (line == "ADD")
 			pb.add_contact();
-		else if (line == "DISPLAY")
+		else if (line == "SEARCH")
 			pb.display();
 		else if (line == "EXIT")
 			break;
