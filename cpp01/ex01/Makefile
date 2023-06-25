@@ -1,14 +1,10 @@
 NAME = zombo
 
-CC = c++
+CXX = c++
 
-CFLAGS = -Wall -Werror -Wextra
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
-CFLAGS += -std=c++98
-
-CFLAGS += -g3
-
-LDFLAGS = -fsanitize=leak
+LDFLAGS = -fsanitize=address
 
 SRC = main.cpp \
       Zombie.cpp \
@@ -16,15 +12,10 @@ SRC = main.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 
-RM = rm -f
-
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(LDFLAGS) -o $(NAME)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)

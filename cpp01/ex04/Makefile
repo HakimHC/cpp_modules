@@ -2,13 +2,9 @@ NAME = sed
 
 TNAME = tester
 
-CC = c++
+CXX = c++
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98
-
-# CFLAGS += -fsanitize=address -g3
-
-# LDFLAGS = -fsanitize=address
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRC = sed.cpp \
       main.cpp
@@ -24,13 +20,10 @@ RM = rm -f
 all: $(NAME) $(TNAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
+	$(CXX) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 $(TNAME): $(NAME) $(TOBJ)
-	$(CC) $(CFLAGS) $(TOBJ) -o $(TNAME)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CFLAGS) $(TOBJ) -o $(TNAME)
 
 clean:
 	$(RM) $(OBJ)

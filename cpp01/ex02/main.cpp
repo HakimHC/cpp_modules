@@ -9,13 +9,13 @@ int	main(void)
 
 	std::cout << std::endl << "======= MEMORY ADDRESS =======" << std::endl << std::endl;
 
-	std::cout << "str:	\t\t\t" << &str << std::endl;
+	std::cout << "str:	\t" << &str << std::endl;
 	std::cout << "stringPTR:\t" << stringPTR << std::endl;
 	std::cout << "stringREF:\t" << &stringREF << std::endl << std::endl;
 
 	std::cout << "=========== VALUES ===========" << std::endl << std::endl;
 
-	std::cout << "str:	\t\t\t" << str << std::endl;
+	std::cout << "str:	\t" << str << std::endl;
 	std::cout << "stringPTR:\t" << *stringPTR << std::endl;
 	std::cout << "stringREF:\t" << stringREF << std::endl << std::endl;
 	std::cout << "==============================" << std::endl << std::endl;
