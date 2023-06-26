@@ -6,7 +6,9 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRC = main.cpp \
       AMateria.cpp \
-      Ice.cpp
+      Ice.cpp \
+      Cure.cpp \
+      Character.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

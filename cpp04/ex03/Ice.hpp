@@ -12,6 +12,7 @@ class Ice : public AMateria {
 		~Ice();
 
 		AMateria* clone() const;
+		void use(ICharacter& target);
 };
 
 #endif
