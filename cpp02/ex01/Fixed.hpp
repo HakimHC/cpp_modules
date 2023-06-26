@@ -6,8 +6,8 @@
 class Fixed {
 
 	private:
-		int val;
-		static int const fbits;
+		int			_val;
+		static int const	_fbits;
 
 	public:
 		Fixed();

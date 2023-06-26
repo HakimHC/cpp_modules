@@ -1,11 +1,11 @@
-#ifndef FIXED_H
-# define FIXED_H
+#ifndef __FIXED_HPP__
+# define __FIXED_HPP__
 
 class Fixed {
 
 	private:
-		int val;
-		static int const fbits;
+		int			_val;
+		static int const	_fbits;
 
 	public:
 		Fixed();

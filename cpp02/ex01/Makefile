@@ -1,23 +1,18 @@
 NAME	=	fixed
 
-CC	=	c++
+CXX	=	c++
 
-CFLAGS	=	-Wall -Werror -Wextra -std=c++98
+CXXFLAGS=	-Wall -Werror -Wextra -std=c++98
 
 SRC	=	main.cpp \
 		Fixed.cpp
 
 OBJ	=	$(SRC:.cpp=.o)
 
-RM	=	rm -f
-
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)
