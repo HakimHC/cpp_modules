@@ -6,12 +6,15 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 CXXFLAGS += -g3
 
+CXXFLAGS += -fsanitize=address
+
 SRC = main.cpp \
       AMateria.cpp \
       Ice.cpp \
       Cure.cpp \
       Character.cpp \
-      MateriaSource.cpp
+      MateriaSource.cpp \
+      TestFont.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

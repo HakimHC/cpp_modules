@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "AMateria.hpp"
 #include "Character.hpp"
 
 Character::Character()
@@ -46,17 +47,25 @@ Character& Character::operator=(Character& rhs) {
 void Character::equip(AMateria *m) {
 	for (int i = 0; i < MAX_EQUIP; i++) {
 		if (!this->_inventory[i]) {
+			if (m->getState() == EQUIPPED) {
+				std::cout << "Cannot equip materia (materia already equipped)" << std::endl;
+				return;
+			}
 			this->_inventory[i] = m;
+			m->setState(EQUIPPED);
 			return;
 		}
 	}
+	std::cout << "Cannot equip materia (inventory full)" << std::endl;
 }
 
 void Character::unequip(int idx) {
 	if (idx < 0 || idx > 3)
 		std::cout << "BAD INDEX: bad index range" << std::endl;
-	else if (this->_inventory[idx])
+	else if (this->_inventory[idx]) {
+		this->_inventory[idx]->setState(UNEQUIPPED);
 		this->_inventory[idx] = NULL;
+	}
 	else
 		std::cout << "BAD INDEX: no materia at index" << std::endl;
 }

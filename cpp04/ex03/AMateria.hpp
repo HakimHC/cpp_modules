@@ -5,12 +5,18 @@
 
 # define MAXPTR 1024
 
+enum state {
+	UNEQUIPPED,
+	EQUIPPED
+};
+
 class ICharacter;
 
 class AMateria {
 
 	protected:
-		std::string const _type;
+		std::string const 	_type;
+		bool			_state;
 	
 	public:
 		AMateria();
@@ -23,6 +29,9 @@ class AMateria {
 
 		virtual AMateria* clone() const = 0;
 		virtual void use(ICharacter& target);
+
+		void		setState(bool state);
+		bool		getState() const;
 };
 
 #endif
