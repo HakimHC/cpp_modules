@@ -3,6 +3,8 @@
 
 # include <string>
 
+# define MAXPTR 1024
+
 class ICharacter;
 
 class AMateria {

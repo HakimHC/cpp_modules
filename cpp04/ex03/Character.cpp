@@ -57,6 +57,8 @@ void Character::unequip(int idx) {
 		std::cout << "BAD INDEX: bad index range" << std::endl;
 	else if (this->_inventory[idx])
 		this->_inventory[idx] = NULL;
+	else
+		std::cout << "BAD INDEX: no materia at index" << std::endl;
 }
 
 void Character::use(int idx, ICharacter& target) {
