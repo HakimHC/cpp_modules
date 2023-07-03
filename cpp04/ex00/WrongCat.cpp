@@ -24,6 +24,10 @@ WrongCat& WrongCat::operator=(WrongCat& rhs) {
 	return *this;
 }
 
+void	WrongCat::makeSound() const {
+	std::cout << "meow meow" << std::endl;
+}
+
 WrongCat::~WrongCat() {
 	std::cout << "WrongCat destructor called" << std::endl;
 }

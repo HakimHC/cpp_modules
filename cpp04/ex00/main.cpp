@@ -20,7 +20,7 @@ int main()
 	meta->makeSound();
 
 	const WrongAnimal* w = new WrongAnimal();
-	const WrongCat* wc = new WrongCat();
+	const WrongAnimal* wc = new WrongCat();
 
 	std::cout << w->getType() << " " << std::endl;
 	std::cout << wc->getType() << " " << std::endl;

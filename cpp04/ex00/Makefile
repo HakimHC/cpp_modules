@@ -4,6 +4,8 @@ CXX = c++
 
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
+CXXFLAGS += -g3
+
 SRC = main.cpp \
       Animal.cpp \
       Dog.cpp \
@@ -11,7 +13,7 @@ SRC = main.cpp \
       WrongAnimal.cpp \
       WrongCat.cpp
 
-LDFLAGS = -fsanitize=leak
+LDFLAGS = -fsanitize=address
 
 OBJ = $(SRC:.cpp=.o)
 
