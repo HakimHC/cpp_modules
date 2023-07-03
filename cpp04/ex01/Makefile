@@ -12,7 +12,7 @@ SRC = main.cpp \
       WrongCat.cpp \
       Brain.cpp
 
-LDFLAGS = -fsanitize=leak
+LDFLAGS = -fsanitize=address
 
 OBJ = $(SRC:.cpp=.o)
 
