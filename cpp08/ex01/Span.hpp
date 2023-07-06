@@ -17,6 +17,7 @@ class Span {
 
 		void	addNumber(int);
 		int 	longestSpan();
+		int 	shortestSpan();
 
 		void	printVector();
 };
