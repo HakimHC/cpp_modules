@@ -1,6 +1,8 @@
 #include <algorithm>
+#include <iterator>
 #include <stdexcept>
 #include <iostream>
+#include <functional>
 
 #include "Span.hpp"
 
@@ -10,7 +12,7 @@ Span::Span(unsigned int n): _N(n) {}
 
 Span::~Span() {}
 
-Span::Span(Span& other):_N(other._N), _vec(other._vec) {}
+Span::Span(const Span& other):_N(other._N), _vec(other._vec) {}
 
 Span& Span::operator=(Span& rhs) {
 	if (this != &rhs) {
@@ -62,4 +64,11 @@ static void printElem(int n) {
 
 void Span::printVector() {
 	std::for_each(this->_vec.begin(), this->_vec.end(), &printElem);
+}
+
+void Span::addRange(std::vector<int>::iterator first, std::vector<int>::iterator last) {
+	if ((unsigned int) std::distance(first, last) > this->_N - this->_vec.size())
+		throw std::runtime_error("Cannot bulk insert elements");
+	for (;first != last; first++)
+		this->addNumber(*first);
 }

@@ -11,13 +11,14 @@ class Span {
 	public:
 		Span();
 		Span(unsigned int);
-		Span(Span&);
+		Span(const Span&);
 		Span& operator=(Span&);
 		~Span();
 
 		void	addNumber(int);
 		int 	longestSpan();
 		int 	shortestSpan();
+		void	addRange(std::vector<int>::iterator first, std::vector<int>::iterator last);
 
 		void	printVector();
 };
