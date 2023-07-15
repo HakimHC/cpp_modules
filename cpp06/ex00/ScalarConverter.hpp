@@ -27,6 +27,7 @@ class ScalarConverter {
 		static void displayInt(std::string&);
 		static void displayFloat(std::string&);
 		static void displayDouble(std::string&);
+		static void displayPseudoLiteral(std::string&);
 
 		static void displayUnknown();
 

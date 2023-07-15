@@ -87,7 +87,7 @@ enum type ScalarConverter::determineType(std::string& s) {
 }
 
 void ScalarConverter::displayChar(std::string& s) {
-	std::cout << "char: " << s[0] << std::endl;
+	std::cout << "char: " << "'" << s[0] << "'" << std::endl;
 	std::cout << "int: " << static_cast<int>(s[0]) << std::endl;
 	std::cout << "float: " << static_cast<float>(s[0]) << ".0f" << std::endl;
 	std::cout << "double: " << static_cast<int>(s[0]) << ".0" << std::endl;
@@ -101,7 +101,7 @@ void ScalarConverter::displayInt(std::string& s) {
 		nond = "Non displayable";
 	std::cout << "char: ";
 	if (nond.empty())
-		std::cout << static_cast<char>(converted) << std::endl;
+		std::cout << "'" << static_cast<char>(converted) << "'" << std::endl;
 	else
 	 	std::cout << nond << std::endl;
 	std::cout << "int: " << converted << std::endl;
@@ -117,7 +117,7 @@ void ScalarConverter::displayFloat(std::string& s) {
 		nond = "Non displayable";
 	std::cout << "char: ";
 	if (nond.empty())
-		std::cout << static_cast<char>(converted) << std::endl;
+		std::cout << "'" << static_cast<char>(converted) << "'" << std::endl;
 	else
 	 	std::cout << nond << std::endl;
 	std::cout << "int: " << static_cast<int>(converted) << std::endl;
@@ -133,12 +133,27 @@ void ScalarConverter::displayDouble(std::string& s) {
 		nond = "Non displayable";
 	std::cout << "char: ";
 	if (nond.empty())
-		std::cout << static_cast<char>(converted) << std::endl;
+		std::cout << "'" << static_cast<char>(converted) << "'" << std::endl;
 	else
 	 	std::cout << nond << std::endl;
 	std::cout << "int: " << static_cast<int>(converted) << std::endl;
 	std::cout << "float: " << s << "f" << std::endl;
 	std::cout << "double: " << s << std::endl;
+}
+
+void ScalarConverter::displayPseudoLiteral(std::string& s) {
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	
+	int pos;
+	int factor;
+	for (pos = 0; pos < _PSEUDO_LITERAL_ARRAY_SIZE; pos++) {
+		if (pseudoLiterals[pos] == s)
+			break;
+	}
+	factor = pos >= 3 ? 3 : -3;
+	std::cout << "float: " << (pos >= 3 ? pseudoLiterals[pos - factor] : pseudoLiterals[pos]) << std::endl;
+	std::cout << "double: " << (pos >= 3 ? pseudoLiterals[pos] : pseudoLiterals[pos - factor]) << std::endl;
 }
 
 void ScalarConverter::displayUnknown() {
@@ -166,18 +181,10 @@ void ScalarConverter::convert(std::string& s) {
 			ScalarConverter::displayDouble(s);
 			break;
 		case PSEUDOLITERAL:
+			ScalarConverter::displayPseudoLiteral(s);
 			break;
 		default:
 			ScalarConverter::displayUnknown();
 
-	}
-	std::string test[] = {"CHAR", "INT", "FLOAT", "DOUBLE", "UNKNOWN", "PS"};
-	int en[] = {CHAR, INT, FLOAT, DOUBLE, UNKNOWN, PSEUDOLITERAL};
-
-	int res = ScalarConverter::determineType(s);
-	for (int i = 0; i < 6; i++)
-	{
-		if (en[i] == res)
-			std::cout << test[i] << std::endl;
 	}
 }
