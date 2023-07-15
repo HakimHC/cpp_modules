@@ -25,8 +25,10 @@ class ScalarConverter {
 
 		static void displayChar(std::string&);
 		static void displayInt(std::string&);
-		/* static void displayFloat(std::string&); */
-		/* static void displayDouble(std::string&); */
+		static void displayFloat(std::string&);
+		static void displayDouble(std::string&);
+
+		static void displayUnknown();
 
 	public:
 		static void convert(std::string&);

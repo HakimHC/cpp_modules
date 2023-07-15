@@ -43,8 +43,8 @@ static bool isFloat(std::string& s) {
 		if (s[i] == '.')
 			continue;
 		else if (i == s.size() - 1 && s[i] == 'f' && std::isdigit(s[i - 1]))
-			continue;
-		else if (!std::isdigit(s[i]))
+			return true;
+		else if (!std::isdigit(s[i]) || (i == s.size() - 1 && s[i] != 'f'))
 			return false;
 	}
 	return true;
@@ -109,6 +109,45 @@ void ScalarConverter::displayInt(std::string& s) {
 	std::cout << "double: " << static_cast<int>(converted) << ".0" << std::endl;
 }
 
+void ScalarConverter::displayFloat(std::string& s) {
+	std::string nond = "";
+	float converted = std::atof(s.c_str());
+
+	if (!std::isprint(static_cast<int>(converted)) || !isascii(static_cast<int>(converted)))
+		nond = "Non displayable";
+	std::cout << "char: ";
+	if (nond.empty())
+		std::cout << static_cast<char>(converted) << std::endl;
+	else
+	 	std::cout << nond << std::endl;
+	std::cout << "int: " << static_cast<int>(converted) << std::endl;
+	std::cout << "float: " << s << std::endl;
+	std::cout << "double: " << static_cast<double>(converted) << std::endl;
+}
+
+void ScalarConverter::displayDouble(std::string& s) {
+	std::string nond = "";
+	double converted = std::atof(s.c_str());
+
+	if (!std::isprint(static_cast<int>(converted)) || !isascii(static_cast<int>(converted)))
+		nond = "Non displayable";
+	std::cout << "char: ";
+	if (nond.empty())
+		std::cout << static_cast<char>(converted) << std::endl;
+	else
+	 	std::cout << nond << std::endl;
+	std::cout << "int: " << static_cast<int>(converted) << std::endl;
+	std::cout << "float: " << s << "f" << std::endl;
+	std::cout << "double: " << s << std::endl;
+}
+
+void ScalarConverter::displayUnknown() {
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: impossible" << std::endl;
+	std::cout << "double: impossible" << std::endl;
+}
+
 void ScalarConverter::convert(std::string& s) {
 
 	enum type type = ScalarConverter::determineType(s);
@@ -120,17 +159,25 @@ void ScalarConverter::convert(std::string& s) {
 		case INT:
 			ScalarConverter::displayInt(s);
 			break;
-		default:
+		case FLOAT:
+			ScalarConverter::displayFloat(s);
 			break;
+		case DOUBLE:
+			ScalarConverter::displayDouble(s);
+			break;
+		case PSEUDOLITERAL:
+			break;
+		default:
+			ScalarConverter::displayUnknown();
 
 	}
-	/* std::string test[] = {"CHAR", "INT", "FLOAT", "DOUBLE", "UNKNOWN", "PS"}; */
-	/* int en[] = {CHAR, INT, FLOAT, DOUBLE, UNKNOWN, PSEUDOLITERAL}; */
+	std::string test[] = {"CHAR", "INT", "FLOAT", "DOUBLE", "UNKNOWN", "PS"};
+	int en[] = {CHAR, INT, FLOAT, DOUBLE, UNKNOWN, PSEUDOLITERAL};
 
-	/* int res = ScalarConverter::determineType(s); */
-	/* for (int i = 0; i < 6; i++) */
-	/* { */
-	/* 	if (en[i] == res) */
-	/* 		std::cout << test[i] << std::endl; */
-	/* } */
+	int res = ScalarConverter::determineType(s);
+	for (int i = 0; i < 6; i++)
+	{
+		if (en[i] == res)
+			std::cout << test[i] << std::endl;
+	}
 }
