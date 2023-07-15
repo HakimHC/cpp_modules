@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <cctype>
 #include <exception>
 #include <iostream>
@@ -92,6 +93,22 @@ void ScalarConverter::displayChar(std::string& s) {
 	std::cout << "double: " << static_cast<int>(s[0]) << ".0" << std::endl;
 }
 
+void ScalarConverter::displayInt(std::string& s) {
+	std::string nond = "";
+	int converted = std::atoi(s.c_str());
+
+	if (!std::isprint(converted) || !isascii(converted))
+		nond = "Non displayable";
+	std::cout << "char: ";
+	if (nond.empty())
+		std::cout << static_cast<char>(converted) << std::endl;
+	else
+	 	std::cout << nond << std::endl;
+	std::cout << "int: " << converted << std::endl;
+	std::cout << "float: " << static_cast<float>(converted) << ".0f" << std::endl;
+	std::cout << "double: " << static_cast<int>(converted) << ".0" << std::endl;
+}
+
 void ScalarConverter::convert(std::string& s) {
 
 	enum type type = ScalarConverter::determineType(s);
@@ -99,6 +116,10 @@ void ScalarConverter::convert(std::string& s) {
 	switch (type) {
 		case CHAR:
 			ScalarConverter::displayChar(s);
+			break;
+		case INT:
+			ScalarConverter::displayInt(s);
+			break;
 		default:
 			break;
 

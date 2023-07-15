@@ -24,7 +24,7 @@ class ScalarConverter {
 		static enum type determineType(std::string&);
 
 		static void displayChar(std::string&);
-		/* static void displayInt(std::string&); */
+		static void displayInt(std::string&);
 		/* static void displayFloat(std::string&); */
 		/* static void displayDouble(std::string&); */
 
