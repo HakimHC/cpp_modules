@@ -3,14 +3,33 @@
 
 # include <string>
 
+enum type {
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE,
+	PSEUDOLITERAL,
+	UNKNOWN
+};
+
+#define _PSEUDO_LITERAL_ARRAY_SIZE 6
+
 class ScalarConverter {
-	public:
+	private:
 		ScalarConverter();
 		ScalarConverter(ScalarConverter&);
 		ScalarConverter& operator=(ScalarConverter&);
 		~ScalarConverter();
 
-		static void convert(std::string);
+		static enum type determineType(std::string&);
+
+		static void displayChar(std::string&);
+		/* static void displayInt(std::string&); */
+		/* static void displayFloat(std::string&); */
+		/* static void displayDouble(std::string&); */
+
+	public:
+		static void convert(std::string&);
 };
 
 #endif
