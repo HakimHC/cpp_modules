@@ -86,18 +86,30 @@ enum type ScalarConverter::determineType(std::string& s) {
 }
 
 void ScalarConverter::displayChar(std::string& s) {
-	(void) s;
+	std::cout << "char: " << s[0] << std::endl;
+	std::cout << "int: " << static_cast<int>(s[0]) << std::endl;
+	std::cout << "float: " << static_cast<float>(s[0]) << ".0f" << std::endl;
+	std::cout << "double: " << static_cast<int>(s[0]) << ".0" << std::endl;
 }
 
 void ScalarConverter::convert(std::string& s) {
-	/* ScalarConverter::displayChar(s); */
-	std::string test[] = {"CHAR", "INT", "FLOAT", "DOUBLE", "UNKNOWN"};
-	int en[] = {CHAR, INT, FLOAT, DOUBLE, UNKNOWN};
 
-	int res = ScalarConverter::determineType(s);
-	for (int i = 0; i < 5; i++)
-	{
-		if (en[i] == res)
-			std::cout << test[i] << std::endl;
+	enum type type = ScalarConverter::determineType(s);
+
+	switch (type) {
+		case CHAR:
+			ScalarConverter::displayChar(s);
+		default:
+			break;
+
 	}
+	/* std::string test[] = {"CHAR", "INT", "FLOAT", "DOUBLE", "UNKNOWN", "PS"}; */
+	/* int en[] = {CHAR, INT, FLOAT, DOUBLE, UNKNOWN, PSEUDOLITERAL}; */
+
+	/* int res = ScalarConverter::determineType(s); */
+	/* for (int i = 0; i < 6; i++) */
+	/* { */
+	/* 	if (en[i] == res) */
+	/* 		std::cout << test[i] << std::endl; */
+	/* } */
 }
