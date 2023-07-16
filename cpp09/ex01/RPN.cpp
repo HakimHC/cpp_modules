@@ -49,6 +49,8 @@ static bool isInt(std::string& token) {
 		if (signCount > 1)
 			return false;
 	}
+	if (std::atoi(token.c_str()) == 0 && token != "0")
+		return false;
 	return true;
 }
 
@@ -56,7 +58,7 @@ static void validateToken(std::string& token) {
 	if (isOperator(token))
 		return;
 	if (!isInt(token))
-		throw std::runtime_error("fatal: non-integer token detected");
+		throw std::runtime_error("fatal: invalid token detected");
 }
 
 void printTokens(std::vector<std::string>& tokens) {
