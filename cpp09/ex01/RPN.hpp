@@ -3,13 +3,13 @@
 
 # include <string>
 # include <stack>
-# include <vector>
+# include <list>
 
 class RPN {
 
 	private:
 		std::stack<int> 		_stack;
-		std::vector<std::string> 	_tokens;
+		std::list<std::string> 		_tokens;
 
 	public:
 		RPN();

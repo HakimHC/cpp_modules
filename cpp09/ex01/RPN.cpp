@@ -61,15 +61,6 @@ static void validateToken(std::string& token) {
 		throw std::runtime_error("fatal: invalid token detected");
 }
 
-void printTokens(std::vector<std::string>& tokens) {
-	std::cout << "TOKENS: [ ";
-		for (std::vector<std::string>::iterator it = tokens.begin(); it != tokens.end(); it++) {
-			std::cout << *it;
-			std::cout << (it + 1 == tokens.end() ? " ]\n" : ", ");
-		}
-
-}
-
 /* Member functions */
 void RPN::parse(std::string& s) {
 	std::string 		token;
@@ -81,11 +72,10 @@ void RPN::parse(std::string& s) {
 			this->_tokens.push_back(token);
 		}
 	}
-	/* printTokens(this->_tokens); */
 }
 
 void RPN::operate() {
-	std::vector<std::string>::iterator 	it;
+	std::list<std::string>::iterator 	it;
 
 	int	a;
 	int	b;
