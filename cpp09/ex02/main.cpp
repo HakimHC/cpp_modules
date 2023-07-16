@@ -3,7 +3,7 @@
 
 #include "PmergeMe.hpp"
 
-int main(int argc, char **argv) {
+int main(int argc, const char **argv) {
 	if (argc == 1) {
 		std::cerr << "fatal: invalid arguments" << std::endl;
 		std::cerr << "usage: ./PmergeMe [arg1] [arg2] ... [argn]" << std::endl;
@@ -12,10 +12,17 @@ int main(int argc, char **argv) {
 	PmergeMe pm = PmergeMe();
 
 	try {
-		pm.parse(++argv);
+		pm.parse(argv + 1);
 	}
 	catch (std::exception& e) {
 		std::cerr << e.what() << std::endl;
+		return 1;
 	}
+	
+	std::cout << "Before:\t";
+	pm.print(VECTOR);
+	pm.sortVector();
+	std::cout << "After:\t";
+	pm.print(VECTOR);
 	return 0;
 }

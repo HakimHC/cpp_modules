@@ -6,6 +6,11 @@
 # include <vector>
 # include <deque>
 
+enum containers {
+	VECTOR,
+	DEQUE
+};
+
 class PmergeMe {
 
 	private:
@@ -18,7 +23,11 @@ class PmergeMe {
 		PmergeMe& operator=(const PmergeMe&);
 		~PmergeMe();
 
-		void parse(char *arr[]);
+		void 	parse(const char *arr[]);
+		void	sortVector();
+		/* void	sortDeque(); */
+
+		void	print(enum containers type) const;
 
 };
 
