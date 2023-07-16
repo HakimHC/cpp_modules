@@ -13,11 +13,12 @@ class RPN {
 
 	public:
 		RPN();
-		RPN(RPN&);
-		RPN& operator=(RPN&);
+		RPN(const RPN&);
+		RPN& operator=(const RPN&);
 		~RPN();
 
-		void parse(std::string& input);
+		void 	parse(std::string& input);
+		void	operate();
 
 };
 
