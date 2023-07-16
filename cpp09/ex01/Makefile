@@ -4,12 +4,7 @@ NAME 		= RPN
 #Compiler flags
 CXXFLAGS 	= -Wall -Werror -Wextra -std=c++98
 
-CXXFLAGS 	+= -fsanitize=address
-
 CXXFLAGS 	+= -g3
-
-#Linker flags
-LDFLAGS 	= -fsanitize=address
 
 #Source files
 SRC 		= main.cpp \
@@ -32,5 +27,10 @@ fclean: clean
 
 re:: fclean
 re:: all
+
+asan: LDFLAGS 	+= -fsanitize=address
+asan: CXXFLAGS 	+= -fsanitize=address
+asan: CXXFLAGS 	+= -O1
+asan: all
 
 .PHONY: all clean fclean re
