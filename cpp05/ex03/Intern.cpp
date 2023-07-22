@@ -4,7 +4,12 @@
 #include "PresidentialPardonForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
-#include "utils.hpp"
+
+enum e_forms {
+	SHRUBBERY,
+	ROBOTOMY,
+	PRESIDENTIAL
+};
 
 Intern::Intern()
 {std::cout << "Intern default constructor called" << std::endl;}
@@ -33,16 +38,22 @@ AForm* Intern::makeForm(std::string f, std::string target) {
 		"presidential pardon"
 	};
 
-	AForm* (*fn[])(std::string)= {
-		&makePPF,
-		&makeRRF,
-		&makeSCF
+	static const e_forms idx[] = {
+		SHRUBBERY,
+		ROBOTOMY,
+		PRESIDENTIAL
 	};
 
 	for (int i = 0; i < totalElements; i++) {
 		if (forms[i] == f) {
-			std::cout << "Intern creates " << f << std::endl;
-			return fn[i](target);
+			switch (idx[i]) {
+				case SHRUBBERY:
+					return new ShrubberyCreationForm(target);
+				case ROBOTOMY:
+					return new RobotomyRequestForm(target);
+				case PRESIDENTIAL:
+					return new PresidentialPardonForm(target);
+			}
 		}
 	}
 	std::cout << "Intern couldn't create " << f << ": invalid form" << std::endl;

@@ -1,8 +1,6 @@
-NAME = ex01
+NAME = ex02
 
-CC = c++
-
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRC = main.cpp \
       Bureaucrat.cpp \
@@ -13,17 +11,10 @@ SRC = main.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 
-LDFLAGS = -fsanitize=address
-
-RM = rm -f
-
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)
@@ -32,5 +23,9 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+asan: CXXFLAGS += -fsanitize=address -g3
+asan: LDFLAGS += -fsanitize=address
+asan: re
 
 .PHONY: all clean fclean re

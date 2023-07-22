@@ -1,8 +1,6 @@
-NAME = ex01
+NAME = ex03
 
-CC = c++
-
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRC = main.cpp \
       Bureaucrat.cpp \
@@ -11,21 +9,13 @@ SRC = main.cpp \
       PresidentialPardonForm.cpp \
       RobotomyRequestForm.cpp \
       Intern.cpp \
-      utils.cpp
 
 OBJ = $(SRC:.cpp=.o)
-
-LDFLAGS = -fsanitize=address
-
-RM = rm -f
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)
