@@ -19,6 +19,10 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
+asan: CXXFLAGS += -fsanitize=address
+asan: LDFLAGS += -fsanitize=address
+asan: re
+
 re:: fclean
 re:: all
 
