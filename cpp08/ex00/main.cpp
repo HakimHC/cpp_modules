@@ -21,13 +21,13 @@ int main() {
 		std::cout << "ToFind: 4 :: " << *(easyfind(vec, 4)) << std::endl;
 		std::cout << "ToFind: 2 :: " << *(easyfind(vec, 2)) << std::endl;
 		std::cout << "ToFind: 1 :: " << *(easyfind(vec, 1)) << std::endl;
-		std::cout << "ToFind: -42 :: " << *(easyfind(vec, -42)) << std::endl;
+		std::cout << "ToFind: 9 :: " << *(easyfind(vec, -42)) << std::endl;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
 
-	std::cout << "Now lets try a list" << std::endl;
+	std::cout << "Now lets try a list (the elements remain the same)" << std::endl;
 
 	std::list<int> head;
 
@@ -41,7 +41,7 @@ int main() {
 		std::cout << "ToFind: 4 :: " << *(easyfind(head, 4)) << std::endl;
 		std::cout << "ToFind: 2 :: " << *(easyfind(head, 2)) << std::endl;
 		std::cout << "ToFind: 1 :: " << *(easyfind(head, 1)) << std::endl;
-		std::cout << "ToFind: -42 :: " << *(easyfind(head, -42)) << std::endl;
+		std::cout << "ToFind: 9 :: " << *(easyfind(head, -42)) << std::endl;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
