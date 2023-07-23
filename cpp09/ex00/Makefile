@@ -1,19 +1,12 @@
-#Name of the executable
-NAME 		= btc
+NAME = btc
 
-#Compiler flags
-CXXFLAGS 	= -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
-CXXFLAGS 	+= -g3
+SRC = main.cpp \
+			BitcoinExchange.cpp
 
-#Source files
-SRC		= main.cpp \
-		  BitcoinExchange.cpp
+OBJ = $(SRC:.cpp=.o)
 
-#Object files
-OBJ 		= $(SRC:.cpp=.o)
-
-#Rules
 all: $(NAME)
 
 $(NAME): $(OBJ)
@@ -28,9 +21,4 @@ fclean: clean
 re:: fclean
 re:: all
 
-asan: CXXFLAGS 	+= -fsanitize=address
-asan: CXXFLAGS 	+= -O1
-asan: LDFLAGS 	+= -fsanitize=address
-asan: re
-
-.PHONY: all clean fclean re asan
+.PHONY: all clean fclean re
