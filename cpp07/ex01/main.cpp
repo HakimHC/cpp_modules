@@ -8,8 +8,13 @@ class Test {
 		int _age;
 	public:
 		Test();
+		Test(const Test&);
+		Test& operator=(const Test&);
+		~Test();
 		static void sayHello(Test&);
 };
+
+Test::~Test() {}
 
 Test::Test()
 	:_age(1)
@@ -17,6 +22,16 @@ Test::Test()
 
 	std::cout << "constructor called" << std::endl;
 }
+
+Test::Test(const Test& other) {
+  *this = other;
+}
+
+Test& Test::operator=(const Test& rhs) {
+  if (this != &rhs) this->_age = rhs._age;
+  return *this;
+}
+
 
 void Test::sayHello(Test& a) {
 	std::cout << "Hello!! I am " << a._age << " years old" << std::endl;
@@ -26,6 +41,10 @@ void	incr(int& n) {
 	++n;
 }
 
+void print(int& n) {
+  std::cout << n << " ";
+}
+
 int main() {
 	int arr[4] = {1, 2, 3, 4};
 	int i;
@@ -33,16 +52,12 @@ int main() {
 	std::cout << "=======================================================================" << std::endl;
 	std::cout << "Lets start with a simple test, array of 4 integers => foreach increment" << std::endl;
 	std::cout << "=======================================================================" << std::endl;
-	for (i = 0; i < 4; ++i) {
-		std::cout << arr[i] << " ";
-	}
+  iter(arr, 4, &print);
 	std::cout << std::endl;
 
 	iter(arr, 4, &incr);
 
-	for (i = 0; i < 4; ++i) {
-		std::cout << arr[i] << " ";
-	}
+  iter(arr, 4, &print);
 	std::cout << std::endl;
 
 
@@ -60,5 +75,4 @@ int main() {
 
 	Test *t = new Test[5];
 	iter(t, 5, &(t[i].sayHello));
-
 }
