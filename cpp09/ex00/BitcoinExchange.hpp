@@ -1,23 +1,25 @@
-#ifndef __BITCOIN_EXCHANGE_HPP
-# define __BITCOIN_EXCHANGE_HPP
+#ifndef __BITCOIN_EXCHANGE_HPP__
+#define __BITCOIN_EXCHANGE_HPP__
 
-# include <string>
-# include <map>
+#include <map>
+#include <string>
 
 class BitcoinExchange {
-	public:
-		BitcoinExchange();
-		BitcoinExchange(const BitcoinExchange&);
-		BitcoinExchange& operator=(const BitcoinExchange&);
-		~BitcoinExchange();
+ public:
+  BitcoinExchange();
+  BitcoinExchange(const BitcoinExchange&);
+  BitcoinExchange& operator=(const BitcoinExchange&);
+  ~BitcoinExchange();
 
-		static void 	csvParser(std::string&);
-		void 		loadDatabase();
+  static void csvParser(std::string&, std::map<std::string, float>&,
+                        char delimiter);
+  void loadDatabase(std::string&);
 
-	private:
-		std::map<std::string, float> 	_mapDatabase;
-		std::map<std::string, float> 	_mapInFile;
+ private:
+  std::map<std::string, float> _mapDatabase;
+  std::map<std::string, float> _mapInFile;
 
+  static bool validateDate(const std::string&);
 };
 
 #endif
