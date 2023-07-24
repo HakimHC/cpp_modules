@@ -1,25 +1,23 @@
 #ifndef __RPN_HPP__
-# define __RPN_HPP__
+#define __RPN_HPP__
 
-# include <string>
-# include <stack>
-# include <list>
+#include <list>
+#include <stack>
+#include <string>
 
 class RPN {
+ private:
+  std::stack<int> _stack;
+  std::list<std::string> _tokens;
 
-	private:
-		std::stack<int> 		_stack;
-		std::list<std::string> 		_tokens;
+ public:
+  RPN();
+  RPN(const RPN&);
+  RPN& operator=(const RPN&);
+  ~RPN();
 
-	public:
-		RPN();
-		RPN(const RPN&);
-		RPN& operator=(const RPN&);
-		~RPN();
-
-		void 	parse(std::string& input);
-		void	operate();
-
+  void parse(std::string& input);
+  void operate();
 };
 
 #endif

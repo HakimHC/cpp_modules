@@ -21,7 +21,10 @@ int main(int argc, const char **argv) {
 	
 	std::cout << "Before:\t";
 	pm.print(VECTOR);
-	pm.sortVector();
+	try {
+		pm.sortVector();
+	}
+	catch (...) {}
 	std::cout << "After:\t";
 	pm.print(VECTOR);
 	return 0;

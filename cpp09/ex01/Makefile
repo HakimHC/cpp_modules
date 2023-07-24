@@ -31,6 +31,6 @@ re:: all
 asan: LDFLAGS 	+= -fsanitize=address
 asan: CXXFLAGS 	+= -fsanitize=address
 asan: CXXFLAGS 	+= -O1
-asan: all
+asan: re
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re asan
