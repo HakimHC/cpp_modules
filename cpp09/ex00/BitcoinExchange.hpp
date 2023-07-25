@@ -24,6 +24,8 @@ class BitcoinExchange {
 
     /* Private member functions */
     static bool validateDate(const std::string&);
+    static std::string getKey(std::string, char delimiter);
+    static float getValue(std::string, char delimiter);
 
 };
 

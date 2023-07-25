@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) {
   (void) argv;
   try {
     btc.loadDatabase();
+    /* Nop */
   }
   catch(std::exception& e) {
     std::cerr << e.what() << std::endl;

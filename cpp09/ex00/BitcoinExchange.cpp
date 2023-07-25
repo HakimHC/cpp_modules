@@ -36,6 +36,25 @@ bool BitcoinExchange::validateDate(const std::string& s) {
   return ret;
 }
 
+std::string BitcoinExchange::getKey(std::string s, char delimiter) {
+  size_t findPos = s.find(delimiter);
+  if (findPos == std::string::npos) throw std::runtime_error("fatal: cannot find delimiter");
+  s = s.substr(0, findPos);
+  trimFrontBack(s);
+  return s;
+}
+
+float BitcoinExchange::getValue(std::string s, char delimiter) {
+  size_t findPos = s.find(delimiter);
+  if (findPos == std::string::npos) throw std::runtime_error("fatal: cannot find delimiter");
+  trimFrontBack(s);
+  s = s.substr(findPos + 1, s.size());
+  char *ptr;
+  float res = strtof(s.c_str(), &ptr);
+  if (*ptr) throw std::runtime_error("fatal: invalid value");
+  return res;
+}
+
 void BitcoinExchange::loadDatabase() {
   /* Open data.csv */
   std::ifstream dataBase(_DEFAULT_DB_PATH);
@@ -46,17 +65,9 @@ void BitcoinExchange::loadDatabase() {
   /* Read data.csv and validate tokens */
   std::getline(dataBase, line);
   while (std::getline(dataBase, line)) {
-    size_t findPos = line.find(",");
-    if (findPos == std::string::npos) throw std::runtime_error("fatal: parsing error in data.csv (no delimiter)");
-    std::string key = line.substr(0, findPos);
+    std::string key = BitcoinExchange::getKey(line, ',');
     if (!validateDate(key)) throw std::runtime_error("fatal: parsing error in data.csv (invalid date)");
-    std::string tmp = line.substr(findPos + 1, line.size());
-    trimFrontBack(tmp);
-    std::cout << "res: " << tmp <<std::endl;
-    std::stringstream ss; 
-    ss << tmp;
-    double value;
-    ss >> value;
+    float value = BitcoinExchange::getValue(line, ',');
     this->_map[key] = value;
     std::cout << key << "," << this->_map[key] << std::endl;
   }
