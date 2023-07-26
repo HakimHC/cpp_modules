@@ -2,6 +2,7 @@
 # define __PMERGE_ME_HPP
 
 # include <algorithm>
+#include <bits/types/clock_t.h>
 # include <string>
 # include <vector>
 # include <deque>
@@ -25,10 +26,12 @@ class PmergeMe {
 
 		void 	parse(const char *arr[]);
 		void	sortVector();
-		/* void	sortDeque(); */
+		void	sortDeque();
 
 		void	print(enum containers type) const;
 
+    double trackRunTimeVector();
+    double trackRunTimeDeque();
 };
 
 #endif

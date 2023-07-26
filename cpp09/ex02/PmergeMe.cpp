@@ -4,10 +4,11 @@
 #include <cctype>
 #include <climits>
 #include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <stdexcept>
 
-#define _CHUNK_SIZE 10
+#define _CHUNK_SIZE 7
 
 /* Default constructor and destructor */
 PmergeMe::PmergeMe() {}
@@ -54,13 +55,13 @@ static void validateArgument(std::string argument) {
 template <typename T>
 static void insertionSort(T& container, size_t l, size_t r) {
   for (size_t i = l; i < r; i++) {
-    size_t j = i;
-    while (j > l && container[j] < container[j - 1]) {
-      unsigned int tmp = container[j];
+    unsigned int tmp = container[i + 1];
+    size_t j  = i  + 1;
+    while (j > l && container[j - 1] > tmp) {
       container[j] = container[j - 1];
-      container[j - 1] = tmp;
       --j;
     }
+    container[j] = tmp;
   }
 }
 
@@ -75,32 +76,63 @@ static void printContainer(T container) {
 static void _mergeVector(std::vector<unsigned int>& vec, int left, int mid,
                          int right) {
   int n1 = mid - left + 1;
-  int n2 = right - left;
-  std::vector<unsigned int> left_vector;
-  std::vector<unsigned int> right_vector;
+  int n2 = right - mid;
+  std::vector<unsigned int> leftVector(n1);
+  std::vector<unsigned int> rightVector(n2);
 
-  for (int i = left; i < mid; i++) left_vector.push_back(vec[i]);
-  for (int i = mid; i < right; i++) right_vector.push_back(vec[i]);
+  for (int i = 0; i < n1; i++) leftVector[i] = vec[left + i];
+  for (int i = 0; i < n2; i++) rightVector[i] = vec[mid + 1 + i];
 
-  int left_index = 0;
-  int right_index = 0;
+  int leftIndex = 0;
+  int rightIndex = 0;
 
-  for (int i = left; i < right - left + 1; i++) {
-    if (right_index == n2) {
-      vec[i] = left_vector[left_index];
-      ++left_index;
-    } else if (left_index == n1) {
-      vec[i] = right_vector[right_index];
-      ++right_index;
-    } else if (right_vector[right_index] > left_vector[left_index]) {
-      vec[i] = left_vector[left_index];
-      ++left_index;
+  for (int i = left; i < right + 1; i++) {
+    if (rightIndex >= n2) {
+      vec[i] = leftVector[leftIndex];
+      ++leftIndex;
+    } else if (leftIndex >= n1) {
+      vec[i] = rightVector[rightIndex];
+      ++rightIndex;
+    } else if (rightVector[rightIndex] > leftVector[leftIndex]) {
+      vec[i] = leftVector[leftIndex];
+      ++leftIndex;
     } else {
-      vec[i] = right_vector[right_index];
-      ++right_index;
+      vec[i] = rightVector[rightIndex];
+      ++rightIndex;
     }
   }
 }
+
+static void _mergeDeque(std::deque<unsigned int>& dq, int left, int mid,
+                         int right) {
+  int n1 = mid - left + 1;
+  int n2 = right - mid;
+  std::deque<unsigned int> leftDeque(n1);
+  std::deque<unsigned int> rightDeque(n2);
+
+  for (int i = 0; i < n1; i++) leftDeque[i] = dq[left + i];
+  for (int i = 0; i < n2; i++) rightDeque[i] = dq[mid + 1 + i];
+
+  int leftIndex = 0;
+  int rightIndex = 0;
+
+  for (int i = left; i < right + 1; i++) {
+    if (rightIndex >= n2) {
+      dq[i] = leftDeque[leftIndex];
+      ++leftIndex;
+    } else if (leftIndex >= n1) {
+      dq[i] = rightDeque[rightIndex];
+      ++rightIndex;
+    } else if (rightDeque[rightIndex] > leftDeque[leftIndex]) {
+      dq[i] = leftDeque[leftIndex];
+      ++leftIndex;
+    } else {
+      dq[i] = rightDeque[rightIndex];
+      ++rightIndex;
+    }
+  }
+}
+
 
 static void _sortVector(std::vector<unsigned int>& vec, int left, int right) {
   if (right - left > _CHUNK_SIZE) {
@@ -110,6 +142,17 @@ static void _sortVector(std::vector<unsigned int>& vec, int left, int right) {
     _mergeVector(vec, left, mid, right);
   } else {
     insertionSort(vec, left, right);
+  }
+}
+
+static void _sortDeque(std::deque<unsigned int>& dq, int left, int right) {
+  if (right - left > _CHUNK_SIZE) {
+    int mid = (left + right) / 2;
+    _sortDeque(dq, left, mid);
+    _sortDeque(dq, mid + 1, right);
+    _mergeDeque(dq, left, mid, right);
+  } else {
+    insertionSort(dq, left, right);
   }
 }
 
@@ -123,9 +166,35 @@ void PmergeMe::parse(const char* arr[]) {
 }
 
 void PmergeMe::sortVector() {
-  _sortVector(this->_vec, 0, this->_vec.size());
+  _sortVector(this->_vec, 0, this->_vec.size() - 1);
   if (!_isSorted(this->_vec))
     throw std::runtime_error("fatal: vector is not sorted");
+}
+
+void PmergeMe::sortDeque() {
+  _sortDeque(this->_dq, 0, this->_dq.size() - 1);
+  if (!_isSorted(this->_vec))
+    throw std::runtime_error("fatal: deque is not sorted");
+}
+
+double PmergeMe::trackRunTimeVector() {
+  clock_t start = clock();
+
+  this->sortVector();
+
+  clock_t end = clock();
+
+  return double(end - start) / (CLOCKS_PER_SEC / 1000.0);
+}
+
+double PmergeMe::trackRunTimeDeque() {
+  clock_t start = clock();
+
+  this->sortDeque();
+
+  clock_t end = clock();
+
+  return double(end - start) / (CLOCKS_PER_SEC / 1000.0);
 }
 
 void PmergeMe::print(enum containers type) const {
