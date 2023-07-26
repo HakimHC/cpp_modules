@@ -16,6 +16,8 @@ class BitcoinExchange {
 
     void loadDatabase();
 
+    void parseInputValues(std::string) const;
+
     const std::map<std::string, double>& getDataBase() const;
 
   private:
@@ -23,9 +25,9 @@ class BitcoinExchange {
     std::map<std::string, double> _map;
 
     /* Private member functions */
-    static bool validateDate(const std::string&);
-    static std::string getKey(std::string, char delimiter);
-    static float getValue(std::string, char delimiter);
+    static bool                   validateDate(const std::string&);
+    static std::string            getKey(std::string, char delimiter);
+    static float                  getValue(std::string, char delimiter);
 
 };
 

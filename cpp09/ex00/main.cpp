@@ -19,9 +19,15 @@ int main(int argc, char *argv[]) {
   (void) argv;
   try {
     btc.loadDatabase();
-    /* Nop */
   }
-  catch(std::exception& e) {
+  catch (std::exception& e) {
+    std::cerr << "fatal: error while parsing data.csv (" << e.what() << ")" << std::endl;
+    return 1;
+  }
+  try {
+    btc.parseInputValues(argv[1]);
+  }
+  catch (std::exception& e) {
     std::cerr << e.what() << std::endl;
   }
 }
